@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RipVIS segment</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="wrap">
+    <header class="brand">
+      <p class="kicker"><span class="swatch" aria-hidden="true"></span> RipVIS</p>
+      <p class="model">YOLOv8s segmentation</p>
+    </header>
+
+    <h1>See the rip.</h1>
+    <p class="lede">Upload a shoreline photo. The model draws rip-current masks and returns the annotated frame.</p>
+
+    <form id="form">
+      <label class="drop" id="drop" for="file">
+        <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
+          <path d="M14 36c6 0 6-6 12-6s6 6 12 6 6-6 12-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          <path d="M14 44c6 0 6-6 12-6s6 6 12 6 6-6 12-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.5"></path>
+        </svg>
+        <p class="status" id="status">Drop a coastal photo</p>
+        <p class="hint">JPEG, PNG, WebP, or BMP · up to 20 MB</p>
+        <span class="browse">Browse</span>
+      </label>
+      <input id="file" name="image" type="file" accept="image/jpeg,image/png,image/webp,image/bmp,.jpg,.jpeg,.png,.webp,.bmp">
+    </form>
+
+    <p class="error" id="error" hidden></p>
+
+    <section class="result" id="result" hidden>
+      <div class="compare">
+        <figure>
+          <img id="source" alt="Original upload">
+          <figcaption>Source</figcaption>
+        </figure>
+        <figure>
+          <div class="frame">
+            <div class="skeleton" id="skeleton">Segmenting</div>
+            <img id="output" alt="Segmentation result" hidden>
+          </div>
+          <figcaption>Segmentation</figcaption>
+        </figure>
+      </div>
+      <div class="stats" id="stats"></div>
+      <ul class="detections" id="detections"></ul>
+      <button class="again" id="again" type="button">Segment another</button>
+    </section>
+  </div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
